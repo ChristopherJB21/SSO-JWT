@@ -16,7 +16,7 @@ func GenerateToken(user model.User) (string, error) {
 		RegisteredClaims: jwt.RegisteredClaims{
 			Issuer:    "ssojwt.com",
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * 5)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
 		},
 	}
 
@@ -26,7 +26,7 @@ func GenerateToken(user model.User) (string, error) {
 	privateKeyParse, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(privateKey))
 	PanicIfError(err)
 
-	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodRS512, claims)
 
 	tokenString, err := token.SignedString(privateKeyParse)
 	PanicIfError(err)

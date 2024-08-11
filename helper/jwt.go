@@ -26,7 +26,7 @@ func GenerateToken(user model.User) (string, error) {
 	privateKeyParse, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(privateKey))
 	PanicIfError(err)
 
-	token := jwt.NewWithClaims(jwt.SigningMethodRS512, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 
 	tokenString, err := token.SignedString(privateKeyParse)
 	PanicIfError(err)

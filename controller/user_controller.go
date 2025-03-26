@@ -51,7 +51,7 @@ func (controller *UserController) Create(writer http.ResponseWriter, request *ht
 
 func (controller *UserController) Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	IDUser := params.ByName("IDUser")
-	id, err := strconv.ParseUint(IDUser, 10, 64)
+	id, err := strconv.ParseUint(IDUser, 10, 32)
 	helper.PanicIfError(err)
 
 	controller.UserService.Delete(request.Context(), uint(id))
@@ -94,7 +94,7 @@ func (controller *UserController) FindAll(writer http.ResponseWriter, request *h
 
 func (controller *UserController) FindById(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	IDUser := params.ByName("IDUser")
-	id, err := strconv.ParseUint(IDUser, 10, 64)
+	id, err := strconv.ParseUint(IDUser, 10, 32)
 	helper.PanicIfError(err)
 
 	userResponse := controller.UserService.FindById(request.Context(), uint(id))
@@ -113,7 +113,7 @@ func (controller *UserController) Update(writer http.ResponseWriter, request *ht
 	helper.ReadFromRequestBody(request, &userUpdateRequest)
 
 	IDUser := params.ByName("IDUser")
-	id, err := strconv.ParseUint(IDUser, 10, 64)
+	id, err := strconv.ParseUint(IDUser, 10, 32)
 	helper.PanicIfError(err)
 
 	userUpdateRequest.IDUser = uint(id)
@@ -147,7 +147,7 @@ func (controller *UserController) UpdatePassword(writer http.ResponseWriter, req
 	helper.ReadFromRequestBody(request, &userUpdatePasswordRequest)
 
 	IDUser := params.ByName("IDUser")
-	id, err := strconv.ParseUint(IDUser, 10, 64)
+	id, err := strconv.ParseUint(IDUser, 10, 32)
 	helper.PanicIfError(err)
 
 	userUpdatePasswordRequest.IDUser = uint(id)
